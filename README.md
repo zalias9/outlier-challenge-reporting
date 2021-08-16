@@ -12,7 +12,7 @@ Our apps need to query and store lots of information. We want to make sure that 
 
 - Implement the `getStudentReport` method in `api.js`. This report should fetch student grade data from the following remote source: https://outlier-coding-test-data.netlify.app/grades.json, where the id in the json data matches the id in the students database. The output should include student details as well as their grades information.
 
-- Implement the `getStudentGradesReport` method in `api.js`. This report should contain the following statistics: highest grade of all students, lowest grade of all students, average grade across all students.
+- Implement the `getStudentGradesReport` method in `api.js`. This report should contain the following statistics for *each course*: highest grade of all students, lowest grade of all students, average grade across all students.
 
 - Create tests relevant for the endpoints.
 
