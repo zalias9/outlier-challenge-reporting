@@ -1,8 +1,8 @@
 module.exports = {
   getHealth,
   getStudent,
-  getStudentReport,
-  getStudentGradesReport
+  getStudentGradesReport,
+  getCourseGradesReport
 }
 
 const knex = require('knex')({
@@ -21,10 +21,10 @@ async function getStudent (req, res, next) {
   throw new Error('This method has not been implemented yet.')
 }
 
-async function getStudentReport (req, res, next) {
+async function getStudentGradesReport (req, res, next) {
   throw new Error('This method has not been implemented yet.')
 }
 
-async function getStudentGradesReport (req, res, next) {
+async function getCourseGradesReport (req, res, next) {
   throw new Error('This method has not been implemented yet.')
 }

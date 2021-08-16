@@ -16,8 +16,8 @@ app.use(express.json())
 
 app.get('/health', api.getHealth)
 app.get('/student/:id', api.getStudent)
-app.get('/student-report/:id', api.getStudentReport)
-app.get('/student-grades-report', api.getStudentGradesReport)
+app.get('/student/:id/grades', api.getStudentGradesReport)
+app.get('/course/all/grades', api.getCourseGradesReport)
 
 app.use(middleware.handleError)
 app.use(middleware.notFound)
