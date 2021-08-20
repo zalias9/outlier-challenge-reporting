@@ -1,5 +1,6 @@
 const blocked = require('blocked-at')
 const express = require('express')
+const db = require('./db')
 
 blocked((time, stack) => {
   console.error(`Blocked for ${time}ms, operation started here:`, stack)
@@ -25,6 +26,8 @@ app.use(middleware.notFound)
 const server = app.listen(PORT, () =>
   console.log(`Server listening on port ${PORT}`)
 )
+
+server.closeDB = () => db.destroy()
 
 if (require.main !== module) {
   module.exports = server

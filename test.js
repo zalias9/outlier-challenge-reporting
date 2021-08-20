@@ -9,7 +9,10 @@ const server = require('./server')
 tape('health', async function (t) {
   const url = `${endpoint}/health`
   try {
-    const { data } = await jsonist.get(url)
+    const { data, response } = await jsonist.get(url)
+    if (response.statusCode !== 200) {
+      throw new Error('Error connecting to sqlite database; did you initialize it by running `npm run init-db`?')
+    }
     t.ok(data.success, 'should have successful healthcheck')
     t.end()
   } catch (e) {
@@ -18,6 +21,7 @@ tape('health', async function (t) {
 })
 
 tape('cleanup', function (t) {
+  server.closeDB()
   server.close()
   t.end()
 })

@@ -1,3 +1,5 @@
+const knex = require('./db')
+
 module.exports = {
   getHealth,
   getStudent,
@@ -5,16 +7,14 @@ module.exports = {
   getCourseGradesReport
 }
 
-const knex = require('knex')({
-  client: 'sqlite3',
-  connection: {
-    filename: './students.db'
-  },
-  useNullAsDefault: true
-})
-
 async function getHealth (req, res, next) {
-  res.json({ success: !!knex })
+  try {
+    await knex('students').first()
+    res.json({ success: true })
+  } catch (e) {
+    console.log(e)
+    res.status(500).end()
+  }
 }
 
 async function getStudent (req, res, next) {
