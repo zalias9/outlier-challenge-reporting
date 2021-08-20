@@ -24,10 +24,10 @@ Our apps need to query and store lots of information. We want to make sure that 
 
 - Part of this challenge is to evaluate your ability to deliver a creative solution that delivers on the requirements. There are no other rules besides the ones stated in this document.
 
-- System overview:
+## System overview
   - Student data is stored in the 'students' table in a database (students.db).
   - The database can be downloaded to your environment by running `npm run init-db`. Running this will overwrite any existing file named `students.db`. This is a [SQLite 3](https://www.sqlite.org/index.html) database, which is accessed using the [knex](https://github.com/knex/knex) query builder library.
-  - Remote grade data exists at https://outlier-coding-test-data.netlify.app/grades.json
+  - Remote grade data exists at https://outlier-coding-test-data.netlify.app/grades.json.
   - Running `npm start` will run the server so that you can test the existing endpoint and write your own. The server uses [express.js](https://expressjs.com/). 
   - Running `npm test` will run the unit tests in `tests.js`. Tests are written in [tape](https://github.com/substack/tape).
   
