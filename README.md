@@ -10,7 +10,7 @@ Our apps need to query and store lots of information. We want to make sure that 
 
 - Implement the `getStudent` method in `api.js`. This should fetch a student record from the `students` table in the database as indicated by the `id` passed in, and return the information as JSON.
 
-- Implement the `getStudentGradesReport` method in `api.js`. This report should fetch student grade data from the following remote source: https://outlier-coding-test-data.netlify.app/grades.json, where the id in the JSON data matches the id in the students database. This data does not change. The output should include student details as well as their grades information, in JSON format.
+- Implement the `getStudentGradesReport` method in `api.js`. This report should use student grade data from the following remote source: https://outlier-coding-test-data.netlify.app/grades.json, where the id in the JSON data matches the id in the students database. The output should include student details as well as their grades information, in JSON format.
 
 - Implement the `getCourseGradesReport` method in `api.js`. This report should contain the following statistics for *each course*: highest grade of all students, lowest grade of all students, average grade across all students. Return the data in JSON format.
 
@@ -27,7 +27,7 @@ Our apps need to query and store lots of information. We want to make sure that 
 ## System Overview
   - Student data is stored in the `students` table in a database (students.db).
   - The database can be downloaded to your environment by running `npm run init-db`. Running this will overwrite any existing file named `students.db`. This is a [SQLite 3](https://www.sqlite.org/index.html) database, which is accessed using the [knex](https://github.com/knex/knex) query builder library.
-  - Remote grade data exists at https://outlier-coding-test-data.netlify.app/grades.json.
+  - Remote grade data exists at https://outlier-coding-test-data.netlify.app/grades.json and does not change.
   - Running `npm start` will run the server so that you can test the existing endpoint and write your own. The server uses [express.js](https://expressjs.com/). 
   - Running `npm test` will run the unit tests in `tests.js`. Tests are written in [tape](https://github.com/substack/tape).
   
