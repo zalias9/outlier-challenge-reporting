@@ -56,5 +56,39 @@ async function getStudentGradesReport (req, res, next) {
 }
 
 async function getCourseGradesReport (req, res, next) {
-  throw new Error('This method has not been implemented yet.')
+  new Promise((resolve, reject) => {
+    try {
+      let courseReport = {}
+      gradesList.forEach(gradeData => {
+        if (!courseReport[gradeData.course]){
+          courseReport[gradeData.course] = {
+            "highestGrade": 0, // Assuming lowest grade is 0
+            "lowestGrade": 100, // Assuming highest grade is 100
+            "averageGrade": 0,
+            "studentCount": 0
+          }
+        }
+        if (gradeData.grade > courseReport[gradeData.course]["highestGrade"]) {
+          courseReport[gradeData.course]["highestGrade"] = gradeData.grade
+        }
+        if (gradeData.grade < courseReport[gradeData.course]["lowestGrade"]) {
+          courseReport[gradeData.course]["lowestGrade"] = gradeData.grade
+        }
+        // Temporarily hold the total, Average is calculated later
+        courseReport[gradeData.course]["averageGrade"] += gradeData.grade
+        courseReport[gradeData.course]["studentCount"] += 1
+      })
+      for (const course in courseReport) {
+        // Calculate average here and delete studentCount
+        courseReport[course].averageGrade /= courseReport[course].studentCount
+        delete courseReport[course].studentCount
+      }
+      resolve(courseReport)
+    } catch (e) { reject(e) }
+  })
+  .then((report) => res.status(200).json(report).send())
+  .catch((e) => {
+    console.log(e)
+    res.status(500).end()
+  })
 }

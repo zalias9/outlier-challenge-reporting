@@ -104,6 +104,20 @@ tape(`GET /student/0/grades [Student id does not exist]`, async function (t) {
   }
 })
 
+tape('GET /course/all/grades', async function (t) {
+  const url = `${endpoint}/course/all/grades`
+  const courseKeys = ['highestGrade', 'lowestGrade', 'averageGrade']
+  try {
+    const { data, response } = await jsonist.get(url)
+    t.ok(response.statusCode === 200, 'Should have response code 200')
+    Object.values(data).forEach((courseData) => {
+      t.same(Object.keys(courseData), courseKeys, 'Every course must have highestGrade, lowestGrade and averageGrade keys')
+    })
+  } catch (e) {
+    t.error(e)
+  }
+})
+
 tape('cleanup', function (t) {
   server.closeDB()
   server.close()
