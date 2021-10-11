@@ -1,4 +1,5 @@
 const knex = require('./db')
+const gradesDb = require('./gradesDb')
 const gradesList = require('./grades')
 
 module.exports = {
@@ -42,7 +43,9 @@ async function getStudentGradesReport (req, res, next) {
     } else {
       // Assuming you don't want to send password_hash with the object
       delete student.password_hash
-      const studentGrades = gradesList.filter(grade => grade.id === student.id)
+      const studentGrades = await gradesDb('grades')
+                                    .select('course', 'grade')
+                                    .where('student_id', student.id)
       student['grades'] = {}
       for (const gradeObj of studentGrades) {
         student['grades'][gradeObj.course] = gradeObj.grade

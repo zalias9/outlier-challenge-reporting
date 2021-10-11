@@ -1,5 +1,10 @@
 const tape = require('tape')
 const jsonist = require('jsonist')
+/**
+ * This is a hack since server.js cannot be modified
+ * according to the rules of the challenge (See Line 132 of this file)
+ */
+const gradesDb = require('./gradesDb')
 
 const port = (process.env.PORT = process.env.PORT || require('get-port-sync')())
 const endpoint = `http://localhost:${port}`
@@ -119,6 +124,12 @@ tape('GET /course/all/grades', async function (t) {
 })
 
 tape('cleanup', function (t) {
+  /**
+ * This is a hack since server.js cannot be modified
+ * according to the rules of the challenge.
+ * gradesDb.destroy() should be part of the server.closeDB function in server.js
+ */
+  gradesDb.destroy()
   server.closeDB()
   server.close()
   t.end()
